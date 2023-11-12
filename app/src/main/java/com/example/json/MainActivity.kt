@@ -3,6 +3,7 @@ package com.example.json
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.json.databinding.ActivityMainBinding
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -23,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         }""";
 
 
-        val person: Person = Json.decodeFromString(json); // JSON 문자열을 객체로 변환
+        val person: Person = Json.decodeFromString(json)// JSON 문자열을 객체로 변환
 
         val jsonString: String = Json.encodeToString(person); // 객체를 JSON 문자열로 변환
 
