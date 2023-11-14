@@ -4,6 +4,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.example.json.databinding.ActivityMainBinding
+import com.google.gson.FieldNamingPolicy
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.google.gson.JsonParser
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
@@ -11,6 +15,7 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
 import org.json.JSONArray
 import org.json.JSONObject
+import java.lang.reflect.Modifier
 
 class MainActivity : AppCompatActivity() {
 
@@ -55,6 +60,26 @@ class MainActivity : AppCompatActivity() {
 //            Log.d("jsonObject", jsonObject.toString());
 //            Log.d("json_id_language", "$id $language");
 //        };
+
+        val jsonObject =
+            JSONObject("{\"name\":\"Douglas Crockford\",\"age\": 66,\"from\" : \"USA\",\"education\" : [\"San Francisco State University\", \"Newport Harbor High School\"] }");
+
+//각각의 키를 직접 가져와서 객체에 매핑
+
+//        val data = PersonData(
+//            jsonObject.getString("name"),
+//            jsonObject.getInt("age"),
+//            jsonObject.getString("from"),
+//            jsonObject.getJSONArray("education")
+//        );
+
+        val gson = GsonBuilder().create();
+
+        val data =
+            "[{\"age\":27,\"name\":\"John\"},{\"age\":21,\"name\":\"Ava\"},{\"age\":38,\"name\":\"Emma\"}]";
+
+        val result = gson.fromJson(jsonObject, Array<sampleData>::class.java)
+        for (data in result)
 
 
     }
@@ -107,6 +132,7 @@ class MainActivity : AppCompatActivity() {
             println("${i + 1}번 email : $email");
         }
     }
+
 }
 
 
