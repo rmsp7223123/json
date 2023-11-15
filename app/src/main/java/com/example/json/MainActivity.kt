@@ -3,6 +3,7 @@ package com.example.json
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
 import com.example.json.databinding.ActivityMainBinding
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
@@ -133,6 +134,43 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun test3() {
+        val jsonStr = assets.open("data.json").reader().readText()
+        //assets폴더에서 data.json이라는 파일을 찾아 일고 jsonStr이라는 변수에 저장
+
+        Log.d("jsonStr",jsonStr)
+
+        //Json
+        val jsonArray = JSONArray(jsonStr)
+        //data.json 파일에서 읽어온 값을 jasonArray라는 배열 변수에 넣는다.
+
+        Log.d("jsonStr",jsonArray.toString())
+
+        for (i in 0 until jsonArray.length()){
+            val jsonObject = jsonArray.getJSONObject(i)
+            //jsonObject라는 변수는 데이터 값이 저장되어있는 jasonArray의 각 i번째 값이다.
+
+            binding.tv4.append("\n--------------------------------\n")
+
+            val id = jsonObject.getString("id") // 데이터 값에서 id값을 불러온다
+            val language = jsonObject.getString("language") // 데이터 값에서 language 값을 불러온다
+
+            binding.tv4.append(
+                        """
+                    $id 
+                """.trimIndent()
+
+                    )
+            //textView에 id 값을 출력한다
+            binding.tv4.append(
+                """
+                    $language
+                """.trimIndent()
+                //textView에 language 값을 출력한다
+            )
+
+        }
+    }
 }
 
 
