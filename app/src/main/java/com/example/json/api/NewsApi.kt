@@ -1,5 +1,6 @@
-package com.example.json
+package com.example.json.api
 
+import com.example.json.News
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
