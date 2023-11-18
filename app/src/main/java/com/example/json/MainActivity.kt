@@ -79,8 +79,8 @@ class MainActivity : AppCompatActivity() {
         val data =
             "[{\"age\":27,\"name\":\"John\"},{\"age\":21,\"name\":\"Ava\"},{\"age\":38,\"name\":\"Emma\"}]";
 
-        val result = gson.fromJson(jsonObject, Array<sampleData>::class.java)
-        for (data in result)
+        // val result = gson.fromJson(jsonObject, Array<sampleData>::class.java)
+        // for (data in result)
 
 
     }
