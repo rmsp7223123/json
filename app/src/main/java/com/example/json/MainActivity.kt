@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
 import com.example.json.databinding.ActivityMainBinding
+import com.fasterxml.jackson.databind.util.ClassUtil
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -171,6 +173,25 @@ class MainActivity : AppCompatActivity() {
 
         }
     }
+
+    fun test2() {
+        val jsonString = "{\"name\":\"Alice\",\"age\":30}";
+
+        val jsonObject = JSONObject(jsonString);
+        val name = jsonObject.getString("name");
+        val age = jsonObject.getInt("age");
+
+        println("Name: $name, Age: $age");
+    };
+
+    fun test4() {
+        val jsonString = "{\"name\":\"Alice\",\"age\":30}";
+
+        val objectMapper = jacksonObjectMapper();
+        val user: User = objectMapper.readValue(jsonString, User::class.java);
+
+        println("Name: ${user.name}, Age: ${user.age}");
+    };
 }
 
 
