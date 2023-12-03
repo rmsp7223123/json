@@ -1,9 +1,12 @@
 package com.example.json
 
+import android.annotation.SuppressLint
+import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
+import android.widget.Toast
 import com.example.json.databinding.ActivityMainBinding
 import com.fasterxml.jackson.databind.util.ClassUtil
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
@@ -23,10 +26,44 @@ import java.lang.reflect.Modifier
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding;
+    lateinit var dbHelper: DBHelper;
+    lateinit var database: SQLiteDatabase;
+    @SuppressLint("Range")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(layoutInflater);
         setContentView(binding.root);
+
+        dbHelper = DBHelper(this, "mydb.db", null, 1);
+        database = dbHelper.writableDatabase;
+
+        binding.insert.setOnClickListener {
+            var query = "INSERT INTO animals('animal') values('${binding.edit.text}');";
+            database.execSQL(query);
+            Toast.makeText(this, "추가되었습니다.${binding.edit.text}", Toast.LENGTH_SHORT).show();
+        };
+
+        binding.select.setOnClickListener {
+            var animals = mutableListOf<String>();
+            var query = "SELECT * FROM animals;";
+            var cursor = database.rawQuery(query, null);
+            while(cursor.moveToNext()){
+                var id = cursor.getString(cursor.getColumnIndex("id"));
+                var animal = cursor.getString(cursor.getColumnIndex("animal"));
+                animals.add("${id}/${animal}");
+            };
+            Toast.makeText(this, animals.toString(), Toast.LENGTH_SHORT).show();
+        };
+
+        binding.update.setOnClickListener {
+            var query = "UPDATE animals SET animal = 'Cat' WHERE id = 1;";
+            database.execSQL(query);
+        };
+
+        binding.delete.setOnClickListener {
+            var query = "DELETE FROM animals WHERE id = 2;";
+            database.execSQL(query);
+        };
 
 //        val json = """{
 //            "name": "John Doe",
@@ -140,36 +177,36 @@ class MainActivity : AppCompatActivity() {
         val jsonStr = assets.open("data.json").reader().readText()
         //assets폴더에서 data.json이라는 파일을 찾아 일고 jsonStr이라는 변수에 저장
 
-        Log.d("jsonStr",jsonStr)
+        Log.d("jsonStr", jsonStr)
 
         //Json
         val jsonArray = JSONArray(jsonStr)
         //data.json 파일에서 읽어온 값을 jasonArray라는 배열 변수에 넣는다.
 
-        Log.d("jsonStr",jsonArray.toString())
+        Log.d("jsonStr", jsonArray.toString())
 
-        for (i in 0 until jsonArray.length()){
+        for (i in 0 until jsonArray.length()) {
             val jsonObject = jsonArray.getJSONObject(i)
             //jsonObject라는 변수는 데이터 값이 저장되어있는 jasonArray의 각 i번째 값이다.
 
-            binding.tv4.append("\n--------------------------------\n")
+            // binding.tv4.append("\n--------------------------------\n")
 
             val id = jsonObject.getString("id") // 데이터 값에서 id값을 불러온다
             val language = jsonObject.getString("language") // 데이터 값에서 language 값을 불러온다
 
-            binding.tv4.append(
-                        """
+            // binding.tv4.append(
+            """
                     $id 
                 """.trimIndent()
 
-                    )
+            //         )
             //textView에 id 값을 출력한다
-            binding.tv4.append(
-                """
+            // binding.tv4.append(
+            """
                     $language
                 """.trimIndent()
-                //textView에 language 값을 출력한다
-            )
+            //textView에 language 값을 출력한다
+            // )
 
         }
     }

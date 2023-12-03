@@ -7,27 +7,37 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/tv_1"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/edit"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp" />
+        android:ems="10"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:inputType="textPersonName"
+        android:text="Animal" />
 
-    <TextView
-        android:id="@+id/tv_2"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/insert"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp" />
+        android:text="INSERT" />
 
-    <TextView
-        android:id="@+id/tv_3"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/select"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp" />
+        android:text="SELECT" />
 
-    <TextView
-        android:id="@+id/tv_4"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/update"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp" />
+        android:text="UPDATE" />
+
+    <Button
+        android:id="@+id/delete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="DELETE" />
 </LinearLayout>
