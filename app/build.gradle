@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'io.realm.kotlin'
 }
 
 android {
@@ -55,6 +56,9 @@ android {
 }
 
 dependencies {
+
+    implementation 'io.realm.kotlin:library-base:1.8.0'
+    implementation 'io.realm.kotlin:library-sync:1.8.0'
 
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.15.2")
 
