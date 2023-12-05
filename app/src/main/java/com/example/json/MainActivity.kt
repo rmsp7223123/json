@@ -230,6 +230,49 @@ class MainActivity : AppCompatActivity() {
 
         println("Name: ${user.name}, Age: ${user.age}");
     };
+
+    fun main() {
+        print("Enter the Score");
+        val score = readLine()!!.toDouble();
+        var grade: Char = if (score >= 90.0) 'A';
+        else if (score in 80.0..89.9) 'B';
+        else if (score in 70.0..79.9) 'C';
+        else 'F';
+        println("Score : $score, Grade : $grade");
+
+        var x = 13;
+
+        when(x){
+            in 1..10 -> println("x는 1 이상 10 이하입니다.")
+            !in 10..20 -> println("x는 10 이상 20 이하의 범위에 포함되지 않습니다.")
+        }
+
+        var str = "hello";
+        when(str) {
+            is String -> println("문자열이다.");
+            else -> println("문자열이 아니다.");
+        };
+
+        when (x) {
+            1 -> println("x == 1");
+            2 -> println("x == 2");
+            in 5..10 -> println("x in 5..10");
+            !in 5..10 -> println("x !in 5..10");
+            else -> println("어떠한 범위에도 없다.");
+        };
+    };
+
+    fun main2() {
+        case("hello");
+    };
+
+    fun case(obj: Any) {
+        when(obj){
+            1 -> println(" is one");
+            "hello" -> println(" is hello");
+            !is String -> println(" is not String");
+        };
+    };
 }
 
 
